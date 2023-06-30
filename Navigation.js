@@ -1,10 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Feed from './screens/Feed';
 import Settings from './screens/tabScreens/Settings';
 import Calendar from './screens/tabScreens/Calendar';
 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native';
 
 //Tab bottom
 const Tab = createBottomTabNavigator();
@@ -26,7 +27,7 @@ function TabGroup() {
                     }
                     return <IconComponent name={iconName} size={size} color={color}/>
                 },
-                tabBarActiveTintColor: "#000000",
+                tabBarActiveTintColor: "#00BFFF",
         })}
         >
             <Tab.Screen name='Notes' component={Feed}/>
@@ -37,8 +38,9 @@ function TabGroup() {
 }
 
 export default function Navigation() {
+    const currentTheme = useColorScheme();
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={currentTheme === "dark" ? DarkTheme : DefaultTheme}>
             <TabGroup/>
         </NavigationContainer>
     )
